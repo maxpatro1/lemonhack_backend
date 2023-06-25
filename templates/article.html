@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .content-container {
+          position: relative;
+          padding: 5rem 0;
+          display: flex;
+          gap: 7rem;
+        }
+
+        .video-container {
+          position: sticky;
+          top: 1rem;
+          flex-shrink: 0;
+          flex-basis: 38rem;
+          flex-grow: 0;
+        }
+
+        .video {
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          margin-bottom: 2rem;
+          border-radius: 2rem;
+        }
+
+        .button {
+          width: 100%;
+          padding: 0.3rem 2.1rem;
+          font-size: 1.3rem;
+          font-weight: 700;
+          /*border: 2px solid var(--color-primary-accent);*/
+          border-radius: 9999px;
+          /*color: var(--color-secondary-accent);*/
+          background-color: transparent;
+        }
+
+        .article-container {
+          flex-grow: 1;
+          flex-shrink: 1;
+          padding: 1.5rem;
+          /*border: 1px solid var(--color-secondary-accent);*/
+          border-radius: 2rem;
+          box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+          margin-top: 1rem;
+          margin-bottom: 2rem;
+          font-size: 1.6rem;
+          font-weight: 800;
+          text-align: center;
+        }
+
+        .paragraph-container {
+          margin-bottom: 1.5rem;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 2rem;
+        }
+
+        .paragraph-tip-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: end;
+        }
+
+        .paragraph-tip {
+          font-size: 1.2rem;
+          font-weight: 700;
+          /*color: var(--color-secondary-accent);*/
+        }
+
+        button.paragraph-tip {
+          transition: color 0.3s;
+        }
+
+        button.paragraph-tip:hover {
+          /*color: var(--color-primary-accent);*/
+        }
+
+        .paragraph-text-container {
+          grid-column: 2 / 5;
+        }
+
+        .paragraph-title {
+          margin-bottom: 1rem;
+          font-size: 1.3rem;
+          font-weight: 700;
+          /*color: var(--color-black);*/
+        }
+
+        .paragraph-text {
+          margin-bottom: 1rem;
+          font-size: 1.1rem;
+          line-height: 1.1;
+        }
+
+        .paragraph-image {
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          object-fit: cover;
+          object-position: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="article-container">
+      <h1 class="title">{{ article.title }}</h1>
+      <div class="paragraph-container">
+        <div class="paragraph-tip-container">
+          <p class="paragraph-tip">Annotation:</p>
+        </div>
+        <div class="paragraph-text-container">
+          <p class="paragraph-text">{{ article.annotation }}</p>
+        </div>
+      </div>
+        {% for segment in  article.segments %}
+      <div class="paragraph-container">
+        <div class="paragraph-tip-container">
+          <button class="paragraph-tip">
+            {{ segment.time[0] }}
+          </button>
+        </div>
+        <div class="paragraph-text-container">
+          <h2 class="paragraph-title" contenteditable="true">
+            {{ segment.text.split('\n')[0].replace('*', '') }}
+          </h2>
+          <p class="paragraph-text" contenteditable="true">{{ segment.text.split('\n')[1] }}</p>
+        </div>
+      </div>
+       {% endfor %}
+    </div>
+</body>
+</html>
