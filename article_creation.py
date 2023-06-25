@@ -1,9 +1,12 @@
+import os
 import time
-
 from spellchecker import SpellChecker
 import openai
+from dotenv import load_dotenv
 
-openai.api_key = "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"
+load_dotenv()
+
+openai.api_key = os.getenv('API_KEY')
 
 
 def split_text(text, max_length):
